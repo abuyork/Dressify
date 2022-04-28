@@ -39,8 +39,25 @@ public class MainActivity extends AppCompatActivity {
         if(mywebView.canGoBack()) {
             mywebView.goBack();
         }
-        else{
-            super.onBackPressed();
+        else{AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setMessage("Are you sure want to Exit?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            MainActivity.super.onBackPressed();
+                        }
+                    })
+
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         }
     }
 }
